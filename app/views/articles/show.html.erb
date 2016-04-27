@@ -1,0 +1,70 @@
+<article class="article container well">
+
+  <!-- 面包屑 -->
+  <div class="breadcrumb">
+    <i class="fa fa-hom		e"></i>
+
+    <%= link_to  articles_path, class: "home" do %>
+        博客
+    <%end%>/
+    <%= @article.title %>
+
+    <div style="float: right">
+
+    <%= link_to  edit_article_path(@article), class: "home" do %>
+        <i class="fa fa-tags"></i>编辑
+    <%end%>
+
+    <%= link_to article_path(@article),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } do %>
+        <i class="fa fa-minus-square"></i>删除
+    <%end%>
+    </div>
+  </div>
+  <!-- 面包屑结束 -->
+
+  <div class="hidden-xs">
+    <div class="title-article">
+      <h1>
+        <a href="#"><%= @article.title %></a>
+      </h1>
+    </div>
+    <div class="tag-article container">
+								<span class="label label-zan"><i class="fa fa-tags"></i>
+									9-21</span>
+
+      <% @article.tag_list.each do |info_tag| %>
+          <span> <i class="fa fa-tags"></i><%= info_tag %> </span>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="centent-article">
+    <figure class="thumbnail hidden-xs"><%= image_tag("car_3.jpg", size: "750x300", alt: "car3", class:"attachment-full wp-post-image") %></figure>
+
+    <p> <%= markdown(@article.text) %></p>
+    <!-- 分页 -->
+    <div class="zan-page bs-example">
+      <ul class="pager">
+        <li class="previous"><a href="#" rel="prev">上一篇</a></li>
+        <li class="next"><a href="#" rel="next">下一篇</a></li>
+      </ul>
+    </div>
+    <!-- 分页 -->
+
+    <!-- 文章版权信息 -->
+    <div class="copyright alert alert-success">
+      <p>
+        版权属于: <a href="http://www.yeahzan.com/zanblog">Wenlh</a>
+      </p>
+      <p>
+        原文地址: <a href="#"><%= link_to @article.title, article_path(@article),id: "myTitle" %></a>
+      </p>
+      <p>转载时必须以链接形式注明原始出处及本声明。</p>
+    </div>
+  </div>
+</article>
+
+<%= render(:partial=>'comments/comments') %>

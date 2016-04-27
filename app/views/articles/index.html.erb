@@ -1,0 +1,80 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+  <!-- 轮播（Carousel）指标 -->
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+  <!-- 轮播（Carousel）项目 -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag("car_1.jpg", size: "750x300", alt: "car1", class:"attachment-full wp-post-image") %>
+    </div>
+    <div class="item">
+      <%= image_tag("car_2.jpg", size: "750x300", alt: "car2", class:"attachment-full wp-post-image") %>
+    </div>
+    <div class="item">
+      <%= image_tag("car_3.jpg", size: "750x300", alt: "car3", class:"attachment-full wp-post-image") %>
+    </div>
+  </div>
+  <!-- 轮播（Carousel）导航 -->
+  <a class="carousel-control left" href="#myCarousel"
+     data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel"
+     data-slide="next">&rsaquo;</a>
+</div>
+
+<% @articles.each do |article| %>
+    <div id="article-list">
+      <div class="article well clearfix">
+        <i class="fa fa-bookmark article-stick visible-md visible-lg"></i>
+        <div class="data-article hidden-xs">
+          <span class="month"><%= article.created_at.strftime("%m") %>月</span> <span class="day"><%= article.created_at.strftime("%d") %></span>
+        </div>
+
+        <section class="hidden-xs">
+
+          <div class="title-article">
+            <h1>
+              <%= link_to article.title, article_path(article),id: "myTitle" %>
+            </h1>
+          </div>
+          <div class="tag-article">
+            <span class="label label-zan">
+
+              <% article.tag_list.each do |info_tag| %>
+                <i class="fa fa-tags"></i>
+                <span><a href="#" rel="category tag"><%= info_tag %>  </a></span>
+              <% end %>
+
+              <span class="label label-zan">
+              <i class="fa fa-user"></i><i class="fa fa-eye"></i>
+             <%= article.view_count%>
+            </span>
+          </div>
+
+
+          <div class="content-article">
+              <blockquote>
+                <%= markdown(article.text.truncate(200).html_safe) %>
+              </blockquote>
+          </div>
+
+          <%= link_to  article_path(article), class: "btn btn-danger pull-right read-more" do %>
+              阅读全文<span class="badge"><%= article.view_count%></span>
+          <%end%>
+        </section>
+
+      </div>
+
+    </div>
+    <!-- 内容主体结束 -->
+<% end %>
+<!-- 分页 -->
+
+<div id="zan-page" class="clearfix">
+  <ul class="pagination pagination-zan pull-right">
+    <%= paginate @articles, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm"%>
+  </ul>
+</div>
+<!-- 分页结束 -->

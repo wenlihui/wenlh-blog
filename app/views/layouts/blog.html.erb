@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wilson's BLog</title>
+  <meta property="qc:admins" content="771157112437632477605273510063757" />
+  <meta property="wb:webmaster" content="edd4773606fbeece" />
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="home blog nav-fixed">
+<%= render(:partial=>'header') %>
+
+
+<div id="zan-bodyer">
+  <div class="container">
+
+    <div class="row">
+      <div id="mainstay" class="col-md-8">
+        <div class="well fade in">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <%= image_tag(current_user.avatar.url(:normal)) if current_user.avatar %>欢迎来到Wilson的个人博客 <i class="fa fa-smile-o"></i>
+          <%= link_to "发帖", new_article_path, class:"btn btn-success" %>
+        </div>
+
+        <%= yield %>
+      </div>
+
+      <aside class="col-md-4" id="sidebar">
+        <aside id="zan_search-2">
+          <div class="search">
+
+            <%= form_tag '/articles', method: 'get', class:"form-inline clearfix", id:"searchform"  do %>
+                <%= text_field_tag :key_word, @key_word, class:"form-control", placeholder:"搜索..." %>
+                <button id="search-button" class="btn btn-danger btn-small"
+                        name="submit"> <i class="fa fa-search"></i></button>
+            <% end %>
+
+
+          </div>
+        </aside>
+        <aside id="zan_hotest_posts-2">
+
+
+          <div class="panel panel-zan hot hidden-xs">
+            <div class="panel-heading">
+              <i class="fa fa-fire"></i> 最热文章 <i
+            class="fa fa-times-circle panel-remove"></i> <i
+            class="fa fa-chevron-circle-up panel-toggle"></i>
+            </div>
+            <ul class="list-group list-group-flush">
+              <% @hot_articles.each do |article| %>
+                  <li class="list-group-item">
+                    <span class="post-title">
+                       <%= link_to article_path(article), id: "myTitle" do %>
+                            <%= article.title%>
+                        <% end %>
+                    </span>
+                    <span class="badge"><%= article.view_count%></span>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+        </aside>
+        <aside id="zan_latest_comments-2">
+          <div class="panel panel-zan hidden-xs">
+            <div class="panel-heading">
+              <i class="fa fa-comments"></i> 最新评论 <i
+            class="fa fa-times-circle panel-remove"></i> <i
+            class="fa fa-chevron-circle-up panel-toggle"></i>
+            </div>
+            <ul class="list-group list-group-flush">
+
+              <% @hot_comments.each do |comment| %>
+                  <li class="list-group-item"><span class="author-avatar"></span>
+                    <span class="comment-log">
+                        <%= link_to article_path(comment.article), id: "myTitle" do %>
+                        <%= comment.body%>...
+                        <% end %>
+                    </span></li>
+              <% end %>
+
+            </ul>
+          </div>
+        </aside>
+        <aside id="zan_sets-2">
+          <div class="panel  panel-zan hidden-xs">
+            <ul class="nav nav-pills pills-zan">
+              <li class="active"><a
+              href="#"
+              data-toggle="tab">热门标签</a></li>
+              <li></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active nav bs-sidenav fade in"
+                   id="sidebar-categories">
+                <% ActsAsTaggableOn::Tag.most_used.each do |tag| %>
+                    <li class="cat-item cat-item-21">
+                      <a href="/articles?tag=<%= tag %>"><%= tag %></a>
+                    </li>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </aside>
+    </div>
+
+  </div>
+</div>
+
+<%= render(:partial=>'footer') %>
+
+</body>
+</html>

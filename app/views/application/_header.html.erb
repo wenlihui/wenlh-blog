@@ -1,0 +1,74 @@
+<div class="ui  large inverted main menu" >
+  <div id="mymenu">
+    <a class="active green item">
+      <i class="large china flag"></i>
+    </a>
+  </div>
+</div>
+
+<header id="zan-header" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#"><div
+      class="navbar-brand"></div></a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse"
+              data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span> <span
+      class="fa fa-reorder fa-lg"></span>
+      </button>
+    </div>
+    <nav class="navbar-collapse bs-navbar-collapse collapse">
+      <ul id="menu-navbar" class="nav navbar-nav">
+        <li id="menu-item-215"
+            class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-215">
+
+          <%= link_to  articles_path, class: "fa fa-home",title:"首页" do %>
+              首页
+          <%end%>
+
+        </li>
+        <li id="menu-item-676"
+            class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-676"><a><i
+        class="fa fa-cog"></i> Wenlh's BLog</a>
+        </li>
+
+        <li id="menu-item-676">
+            <%= link_to  "/articles.rss", class: "fa fa-rss",title:"RSS订阅" do %>
+                RSS订阅
+            <%end%>
+        </li>
+
+        <% if user_signed_in? %>
+            <li id="menu-item-676"
+                class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-676"><a><i
+            class="fa fa-user"></i> 欢迎你 <%= current_user.email %></a>
+            </li>
+
+            <li id="menu-item-676"
+                class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-676">
+              <%= link_to  "/admin", class: "fa fa-user-md",title:"admin" do %>
+                  后台管理
+              <%end%>
+            </li>
+
+            <li id="menu-item-676"
+                class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-676">
+              <%= link_to  destroy_user_session_path, method: :delete, class: "ui item" do %>
+                  <i class= "fa fa-sign-out"></i>注销
+              <%end%>
+            </li>
+        <% else %>
+        <% end %>
+
+
+    </nav>
+  </div>
+  <div id="if-fixed" class="pull-right visible-lg visible-md">
+    <i class="fa fa-thumb-tack"></i>
+    <div class="icheckbox_flat-red checked" style="position: relative;">
+      <input type="checkbox" style="position: absolute; opacity: 0;">
+      <ins class="iCheck-helper"
+           style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+    </div>
+  </div>
+</header>

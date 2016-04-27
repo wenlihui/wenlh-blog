@@ -1,0 +1,48 @@
+<div id="comments-template">
+  <div class="comments-wrap">
+    <div id="comments">
+      <h3 id="comments-title" class="comments-header alert alert-info"><i class="fa fa-comments"></i> <%= @article.comments.size %> 条评论</h3>
+      <div id="loading-comments"><i class="fa fa-spinner fa-spin"></i></div>
+
+      <ol class="commentlist">
+        <% @article.comments.each do |comment| %>
+
+            <li id="comment-2127" class="comment byuser comment-author-wuyuyuan even thread-even depth-1">
+              <article id="div-comment-2127" class="comment-body">
+                <footer class="comment-meta">
+                  <div class="comment-author vcard">
+                    <img alt="" src="http://cn.gravatar.com/avatar/5f3ec2c2e67799398424e2357827e6fa?s=70&amp;d=monsterid&amp;r=G" class="avatar avatar-70 photo" height="70" width="70">
+                    <b class="fn"><a href="#" rel="external nofollow" class="url"><%= comment.commenter %></a></b>
+                    <span class="says">说道：</span>
+                  </div>
+
+                  <div class="comment-metadata">
+                    <a href="#">
+                      <time datetime="2015-01-09T22:27:01+00:00">
+                        <%= time_ago_in_words(comment.created_at) %>							</time>
+                    </a>
+                  </div>
+
+                </footer>
+
+                <div class="comment-content">
+                  <p> <%= comment.body %></p>
+                </div>
+              </article>
+            </li>
+        <% end %>
+
+    </div>
+
+    <h3 id="reply-title" class="comment-reply-title"><i class="fa fa-pencil"></i> 欢迎留言 </h3>
+    <div id="respond" class="comment-respond">
+      <%= form_for([@article, @article.comments.build],  html: { class: "comment-form", id: "commentform" } ) do |f| %>
+          <%= f.text_area :body, rows:"10", cols:"4",placeholder:"赶快发表你的见解吧！"  %>
+          <p class="form-submit">
+            <%= f.submit "发表评论", class: "ui green button", id:"submit"%>
+          </p>
+      <% end %>
+    </div><!-- #respond -->
+
+  </div>
+</div>

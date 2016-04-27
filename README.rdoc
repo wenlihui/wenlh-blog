@@ -1,0 +1,8 @@
+Rails4[Wordpress Style BLog]
+==========
+
+Detail Introduction: https://ruby-china.org/topics/24666
+
+
+Heroku Demo Link:
+https://wilsonsblog.herokuapp.com/

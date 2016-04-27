@@ -1,0 +1,20 @@
+<aside id="zan_login-2">
+  <div class="panel panel-zan">
+    <div class="panel-heading">重置密码</div>
+
+    <div style="padding: 10px">
+
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.error_notification %>
+          <%= f.hidden_field :reset_password_token %>
+
+          <%= f.input :password, autofocus: true, autocomplete: "off" %>
+
+          <%= f.input :password_confirmation, autocomplete: "off" %>
+
+          <%= f.button :submit, class:"btn btn-success", value:"修改密码" %>
+      <% end %>
+    </div>
+  </div>
+</aside>
+
