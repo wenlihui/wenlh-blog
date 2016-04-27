@@ -20,7 +20,7 @@
         <div class="well fade in">
           <button type="button" class="close" data-dismiss="alert">×</button>
           <%= image_tag(current_user.avatar.url(:normal)) if current_user && current_user.avatar %>欢迎来到Wenlh的个人博客 <i class="fa fa-smile-o"></i>
-          <%= link_to "发帖", new_article_path, class:"btn btn-success" %>
+          <%= link_to("发帖", new_article_path, class:"btn btn-success") if current_user %>
         </div>
 
         <%= yield %>
