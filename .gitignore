@@ -1,0 +1,6 @@
+.idea/.generators
+.idea/.rakeTasks
+.idea/runConfigurations/Development__rails4blog_master.xml
+*.xml
+.idea/dataSources.ids
+*.iml
